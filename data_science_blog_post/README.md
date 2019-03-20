@@ -7,6 +7,11 @@ Files in the repository
 1. Jupyter notebook analysis in Python using the Anaconda distribution of libraries. 
 2. CSV file containing data related investments in Indian start-ups
 
+Libraries used
+numpy for linear algebra
+pandas for data processing
+matplolib and seaboard for visualisation
+
 Summary of the results 
 - This analysis shows that there are a few active investors in Indian start-ups, though a significant number of smaller investors.
 - Investment tends to be concentrated in a few industries, specifically consumer internet and technology.

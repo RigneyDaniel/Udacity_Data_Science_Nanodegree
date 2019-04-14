@@ -3,6 +3,18 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    Loads and combines messages and catgeories data.
+    
+    Args:
+        messages_filepath (string): filepath for messages data.
+        categories_filepath (string): filepath for categories data.
+    
+    Returns:
+        df (pandas dataframe): 
+    
+    """
+    
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = pd.merge(messages, categories, left_on='id', right_on='id', how='inner')
@@ -22,11 +34,28 @@ def load_data(messages_filepath, categories_filepath):
     return(df)
     
 def clean_data(df):
-    df[df.duplicated()].shape[0]
+    """
+    Remove duplicates and replaces incorrect values in the abelled messages data.
+    
+    Args:
+        df (pandas dataframe): labelled message data.
+    
+    Returns:
+        df (pandas dataframe): cleaned message data.
+    """
+    
     df = df.drop_duplicates()
+    df.related.replace(2, 0, inplace=True)
     return(df)
 
 def save_data(df, database_filename):
+    """
+    Saves messages to an SQLite database.
+    
+    Args:
+        df (pandas dataframe): cleaned and labelled message data.
+        database_filename (string): where the SQLite database will be saved.
+    """"
     engine = create_engine('sqlite:///{}'.format(database_filename))
     df.to_sql('LabelledMessages', engine, index=False, if_exists='replace')
     engine.dispose()

@@ -27,10 +27,18 @@ Messages are entered into the web application and the categories are displayed v
 
 ## Files
 
-* process_data.py - loads raw message and category data, combines data, cleans data and saves as an SQLite database.
-* train_classifier.py - tokenises messages, constructs a multi-output, random forest classifier model using cross validation. Trains the model on labelled messages and evaulates the models performance using an out-of-sample set of messages.
-* run.py - builds a web application and displays visualisations.
 
+* Data:
+    -  process_data.py: loads raw message and category data, combines data, cleans data and saves as an SQLite database.
+    -  disaster_messages.csv: raw message data.
+    -  disaster_categories.csv: raw categories data.
+    -  DisasterResponse.db: clean, merged messages and categories in an SQLite database file.
+* Models: 
+    -  train_classifier.py: tokenises messages, constructs a multi-output, random forest classifier model using cross validation. Trains the model on labelled messages and evaulates the models performance using an out-of-sample set of messages.
+    -  classifier.pkl: pickled trained classifier.
+* App:
+    -  run.py: builds a web application and displays visualisations.
+    -  Templates: HTML code for rendering the webpages.
 ---
 
 ## Libraries

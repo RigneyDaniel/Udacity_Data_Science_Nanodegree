@@ -55,7 +55,7 @@ def save_data(df, database_filename):
     Args:
         df (pandas dataframe): cleaned and labelled message data.
         database_filename (string): where the SQLite database will be saved.
-    """"
+    """
     engine = create_engine('sqlite:///{}'.format(database_filename))
     df.to_sql('LabelledMessages', engine, index=False, if_exists='replace')
     engine.dispose()

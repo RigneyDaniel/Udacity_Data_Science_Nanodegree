@@ -18,20 +18,21 @@ from sklearn.multioutput import MultiOutputClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.model_selection import GridSearchCV
 
-import joblib
+#import joblib
+import pickle
 
 def load_data(database_filepath):
-   """
-   Load labelled messages from specified database. 
+    """
+    Load labelled messages from specified database. 
    
-   Args: 
-    database_filepath (string): file path of database.
+    Args: 
+        database_filepath (string): file path of database.
    
-   Returns:
-    X (pandas series): messages.
-    y (pandas dataframe): category of labelled message.
-    category_names (list): names each message can be categorised as.
-   """
+    Returns:
+        X (pandas series): messages.
+        y (pandas dataframe): category of labelled message.
+        category_names (list): names each message can be categorised as.
+    """
 
     engine = create_engine('sqlite:///' + database_filepath)
     
@@ -83,7 +84,7 @@ def build_model():
              #'clf__estimator__bootstrap': [True, False],
              #'clf__estimator__max_depth': [10, 100, None],
              #'clf__estimator__max_features': ['auto', 'sqrt'],
-             'clf__estimator__n_estimators': [50]
+             'clf__estimator__n_estimators': [50, 100]
                 }
              
     cv = GridSearchCV(pipeline, param_grid=parameters, n_jobs=-1, cv=3, verbose=2)
@@ -116,7 +117,8 @@ def save_model(model, model_filepath):
         model_filepath (string): where the pickled file is to be saved to.
     """
     
-    joblib.dump(model, model_filepath)
+    #joblib.dump(model, model_filepath)
+    pickle.dump(model, open(model_filepath, "wb"))
 
 
 def main():
